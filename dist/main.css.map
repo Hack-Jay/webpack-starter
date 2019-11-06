@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","sources":["webpack:///./src/index.css","webpack:///./src/index.less"],"sourcesContent":[".header-h1 {\n  color: green;\n}",".less-h1 {\n  font-size: 20px;\n}\n"],"mappings":"AAAA;AACA;AACA;ACFA;AACA;AACA;;","sourceRoot":""}

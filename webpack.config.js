@@ -1,10 +1,5 @@
-const path = require('path');
-
-module.exports = {
-    mode: 'development',
-    entry: './src/index.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'foo.bundle.js'
-    }
+module.exports = (env, argv) => {
+  return argv.mode === 'production' ? 
+    require('./build/webpack.pro.js') :
+    require('./build/webpack.dev.js')
 }
