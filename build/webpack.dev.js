@@ -6,6 +6,10 @@ const baseConfig = require("./webpack.base");
 console.log("dev");
 module.exports = Merge(baseConfig, {
   mode: "development",
+  output: {
+    path: path.resolve(__dirname, "../dist"),
+    filename: "[name].js"
+  },
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     publicPath: "/",

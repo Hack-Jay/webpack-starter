@@ -1,15 +1,11 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = {
   devtool: "cheap-module-source-map",
-  entry: "./src/index.js",
   entry: {
-    main: "./src/index.js"
-  },
-  output: {
-    path: path.resolve(__dirname, "../dist"),
-    filename: "[name].js"
+    main: "./src/index.js",
   },
   resolve: {
     extensions: [".js", ".json", ".jsx", "css", "less"]
@@ -37,15 +33,26 @@ const config = {
               [
                 require.resolve("@babel/preset-env"),
                 {
-                  modules: false
+                  modules: false,
                 }
               ]
+            ],
+            plugins: [
+              // require.resolve('@babel/plugin-transform-runtime')
             ],
             cacheDirectory: true
           }
         }
       },
-    
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10240
+          }
+        }
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/,
         loader: "image-webpack-loader" // 这会应用该 loader，在其它之前 enforce: 'pre'
@@ -56,8 +63,17 @@ const config = {
     new HtmlWebPackPlugin({
       template: "src/index.html",
       filename: "index.html",
-      inject: true
-    })
+      inject: true,
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    }),
+    new CleanWebpackPlugin() 
   ]
 };
 
