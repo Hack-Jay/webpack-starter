@@ -4,6 +4,7 @@ const Merge = require("webpack-merge");
 const baseConfig = require("./webpack.base");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const autoprefixer = require('autoprefixer')
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
 
@@ -27,6 +28,12 @@ module.exports = Merge(baseConfig, {
             loader: "css-loader",
             options: {
               importLoaders: 1,
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [autoprefixer(['IE 10'])]
             }
           }
         ]

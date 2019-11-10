@@ -3,7 +3,6 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const config = {
-  devtool: "cheap-module-source-map",
   entry: {
     main: "./src/index.js",
   },
@@ -16,7 +15,7 @@ const config = {
         test: /\.js$/,
         loader: "eslint-loader",
         enforce: "pre",
-        include: [path.resolve(__dirname, "src")],
+        include: [path.resolve(__dirname, "../src")],
         options: {
           formatter: require("eslint-friendly-formatter")
         }

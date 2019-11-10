@@ -2,3 +2,6 @@
   color: green;
   font-size: 22px;
 }
+.app-container {
+  display: flex;
+}

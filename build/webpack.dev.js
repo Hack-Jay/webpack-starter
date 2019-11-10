@@ -6,6 +6,7 @@ const baseConfig = require("./webpack.base");
 console.log("dev");
 module.exports = Merge(baseConfig, {
   mode: "development",
+  devtool: "cheap-module-source-map",
   output: {
     path: path.resolve(__dirname, "../dist"),
     filename: "[name].js"
