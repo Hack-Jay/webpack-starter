@@ -69,10 +69,10 @@ const config = {
         preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
-        removeComments: false
+        removeComments: false,
       }
     }),
-    new CleanWebpackPlugin() 
+    new CleanWebpackPlugin(),
   ]
 };
 

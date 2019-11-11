@@ -7,6 +7,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const autoprefixer = require('autoprefixer')
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
 
 module.exports = Merge(baseConfig, {
   mode: "production",
@@ -14,8 +16,7 @@ module.exports = Merge(baseConfig, {
     filename: "[name].[chunkhash:8].js",
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.less$/,
         // 添加 loader
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
@@ -40,6 +41,7 @@ module.exports = Merge(baseConfig, {
       }
     ]
   },
+  stats: 'errors-only',
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash:8].css",
@@ -48,10 +50,16 @@ module.exports = Merge(baseConfig, {
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano'),
       cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
+        preset: ['default', {
+          discardComments: {
+            removeAll: true
+          }
+        }],
       },
       canPrint: true
-    })
+    }),
+    new FriendlyErrorsWebpackPlugin()
+
     // new BundleAnalyzerPlugin()
   ],
   optimization: {
